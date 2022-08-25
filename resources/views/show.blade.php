@@ -74,10 +74,17 @@
                         <div class="col">
                             <div>
                                 <a class="w-100">
-                                    <img src="{{'https://image.tmdb.org/t/p/w300/'.$cast['profile_path']}}" alt="" class="img-fluid">
+{{--                                    'https://image.tmdb.org/t/p/w300/'.$cast['profile_path']--}}
+                                    @isset($cast['profile_path'])
+                                        <a href="{{route('actor.show',$cast['id'])}}" class="text-decoration-none">
+                                            <img src="{{"https://image.tmdb.org/t/p/w300/".$cast['profile_path']}}" alt="" class="img-fluid">
+                                        </a>
+                                    @else
+                                        <img src="{{'https://ui-avatars.com/api/?size=300&name='.$cast['name']}}" alt="" class="img-fluid">
+                                    @endisset
                                 </a>
                                 <div>
-                                    <a href="" class="d-flex flex-column  text-white text-decoration-none ">
+                                    <a href="{{route('actor.show',$cast['id'])}}" class="d-flex flex-column  text-white text-decoration-none ">
                                         <span class="fs-5 cast-name">{{$cast['name']}}</span>
                                         <span class="fs-6 cast-character">{{$cast['character']}}</span>
                                     </a>

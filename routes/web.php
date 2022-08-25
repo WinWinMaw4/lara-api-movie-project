@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,11 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('/movie',MovieController::class);
 Route::get('/fetch',[MovieController::class,'fetch'])->name('fetch');
-Route::view('/movies/show','show');
+Route::resource('/movie',MovieController::class);
+Route::resource('/actor',ActorsController::class);
+Route::view('/actors/show','actors.show');
+Route::get('/actor/page/{page?}',[ActorsController::class,'index']);
+//    Route::view('/movies/show','show');
+
+

@@ -22,4 +22,9 @@ Go to config>serviecs and add followin code
 4 install viewModel package -> for refactoring to MoviesViewModel->php artisan make:view-model MoviesViewModel
 
 
+used for infinited scroll in actor>index
+https://infinite-scroll.com/demo/full-page/
 
+https://via.placeholder.com/300x450?text=
+https://ui-avatars.com/api/size=235&name=
+loading.io
