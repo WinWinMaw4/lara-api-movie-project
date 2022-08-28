@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
+use App\ViewModels\SeeAllViewModel;
 use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
@@ -31,11 +32,31 @@ class MovieController extends Controller
 //        }
 //        return "DONE";
     }
+    public function seeAll($section,$page = 1){
+//        return $section;
+        abort_if($page > 500,204);
+        $genres = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=81db1dc62395c3245a614c4ac5e8284e')->json()['genres'];
+
+        if($section == 'popular movies'){
+            $seeAllMovies = Http::get('https://api.themoviedb.org/3/movie/popular?api_key=81db1dc62395c3245a614c4ac5e8284e&page='.$page)->json()['results'];
+        }elseif ($section == 'now playing movies'){
+            $seeAllMovies = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=81db1dc62395c3245a614c4ac5e8284e&page='.$page)->json()['results'];
+        }elseif($section == 'top rate movies'){
+            $seeAllMovies = Http::get('https://api.themoviedb.org/3/movie/top_rated?api_key=81db1dc62395c3245a614c4ac5e8284e&page='.$page)->json()['results'];
+        }else{
+            $seeAllMovies = null;
+        }
+        $viewModel = new SeeAllViewModel(
+            $seeAllMovies,$genres,$section
+        );
+        return view('see-all',$viewModel);
+    }
     public function index()
     {
         $popularMovies = Http::get('https://api.themoviedb.org/3/movie/popular?api_key=81db1dc62395c3245a614c4ac5e8284e')->json()['results'];
         $nowPlayingMovies = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=81db1dc62395c3245a614c4ac5e8284e')->json()['results'];
         $genres = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=81db1dc62395c3245a614c4ac5e8284e')->json()['genres'];
+        $topRateMovies = Http::get('https://api.themoviedb.org/3/movie/top_rated?api_key=81db1dc62395c3245a614c4ac5e8284e')->json()['results'];
 
 //        $genres = collect($genreArray)->mapWithKeys(function ($genre){
 //            return [$genre['id']=>$genre['name']];
@@ -47,7 +68,7 @@ class MovieController extends Controller
 //        ]);
 
         $viewModel = new MoviesViewModel(
-           $popularMovies,$nowPlayingMovies,$genres
+           $popularMovies,$nowPlayingMovies,$genres,$topRateMovies
         );
         return view('index',$viewModel);
     }

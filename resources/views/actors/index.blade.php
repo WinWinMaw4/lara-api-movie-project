@@ -20,7 +20,7 @@
                 @foreach($popularActors as $popularActor)
                 <div class="col actor">
                     <div class="card bg-dark mb-3">
-                        <a href="{{route('actor.show',1)}}">
+                        <a href="{{route('actor.show',$popularActor['id'])}}">
                             <img src="{{$popularActor['profile_path']}}" alt="" class="card-img-top " style="aspect-ratio: auto;">
                         </a>
                         <div class="card-body p-0 px-2 py-1">

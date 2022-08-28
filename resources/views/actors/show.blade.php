@@ -3,45 +3,6 @@
 @section('style')
     <style>
 
-
-    /*    scrollbar*/
-    /* Firefox */
-    .know-for-people-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: #606060 rgba(184, 192, 194, 0.15);
-    }
-
-    /* Chrome, Edge and Safari */
-    .know-for-people-scrollbar::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-    }
-    .know-for-people-scrollbar::-webkit-scrollbar-track {
-        border-radius: 5px;
-        background-color: rgba(184, 192, 194, 0.15);
-    }
-
-    .know-for-people-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: rgba(184, 192, 194, 0.15);
-    }
-
-    .know-for-people-scrollbar::-webkit-scrollbar-track:active {
-        background-color: rgba(184, 192, 194, 0.15);
-    }
-
-    .know-for-people-scrollbar::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        background-color: #606060;
-    }
-
-    .know-for-people-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777676;
-    }
-
-    .know-for-people-scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: #777676;
-    }
-
     </style>
 @endsection
 @section('content')
@@ -90,10 +51,10 @@
                     </p>
                     <div class="know-for-people mb-3">
                         <h5 class="mb-3">Known For </h5>
-                        <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 g-1 flex-nowrap overflow-auto know-for-people-scrollbar">
+                        <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 g-1 flex-nowrap overflow-auto custom-scroll-bar">
                             @foreach($knownForMovies as $movie)
                             <div class="col mb-2 text-center">
-                                <a href="{{route('movie.show',$movie['id'])}}">
+                                <a href="{{$movie['linkToPage']}}">
                                     <img src="{{$movie['poster_path']}}" alt="" class="w-100" style="max-height: 271px;object-fit: cover">
                                 </a>
                                 <a href="{{route('movie.show',$movie['id'])}}" class="text-decoration-none">
@@ -111,8 +72,9 @@
 
                         <ul class="list-group">
                             @foreach($credits as $credit)
-                                <a href="{{route('movie.show',$credit['id'])}}" class="text-decoration-none">
+                                <a href="{{$credit['linkToPage']}}" class="text-decoration-none">
                                     <li class="text-white-50 list-group-item border-0 bg-dark">{{$credit['release_year']}} &middot <b class="text-white">{{$credit['title']}}</b> as <i> {{$credit['character']}}</i></li>
+                                    {{$credit['media_type']}}
                                 </a>
                             @endforeach
                         </ul>

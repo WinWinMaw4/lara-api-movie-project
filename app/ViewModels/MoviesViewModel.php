@@ -9,12 +9,14 @@ use Spatie\ViewModels\ViewModel;
 class MoviesViewModel extends ViewModel
 {
     public $popularMovies,$nowPlayingMovies,$genres;
+    public $topRateMovies;
 
-    public function __construct($popularMovies, $nowPlayingMovies, $genres)
+    public function __construct($popularMovies, $nowPlayingMovies, $genres,$topRateMovies)
     {
         $this->popularMovies = $popularMovies;
         $this->genres = $genres;
         $this->nowPlayingMovies = $nowPlayingMovies;
+        $this->topRateMovies = $topRateMovies;
     }
 
     public function popularMovies(){
@@ -24,11 +26,16 @@ class MoviesViewModel extends ViewModel
     public function nowPlayingMovies(){
        return $this->formatMovies($this->nowPlayingMovies);
     }
+    public function topRateMovies(){
+        return $this->formatMovies($this->topRateMovies);
+
+    }
     public function genres(){
         return collect($this->genres)->mapWithKeys(function ($genre){
             return [$genre['id'] => $genre['name']];
         });
     }
+
 
     private function formatMovies($movies){
             return collect($movies)->map(function ($movie){
@@ -44,7 +51,7 @@ class MoviesViewModel extends ViewModel
                 'genres'=>$genresFormatted,
             ])->only([
                 'poster_path', 'id', 'original_title', 'title', 'overview', 'release_date', 'vote_average', 'vote_count', 'genres'
-            ]);
+            ])->dump();
         });
     }
 }

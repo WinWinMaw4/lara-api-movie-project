@@ -27,8 +27,8 @@
            </a>
            <ul class="list-group list-group-horizontal list-unstyled px-5 d-none d-lg-inline-flex">
                <a href="{{route('movie.index')}}" class="text-decoration-none text-light {{request()->routeIs('movie.index') ? 'active':''}}"><li class="mx-3">Movie</li></a>
-               <a href="#" class="text-decoration-none text-light "><li class="mx-3">TV Shows</li></a>
-               <a href="#" class="text-decoration-none text-light"><li class="mx-3">Actors</li></a>
+               <a href="{{route('tv.index')}}" class="text-decoration-none text-light "><li class="mx-3">TV Shows</li></a>
+               <a href="{{route('actor.index')}}" class="text-decoration-none text-light"><li class="mx-3">Actors</li></a>
            </ul>
        </div>
         <div class="mx-auto mx-lg-0 ms-lg-auto w-25 search-div ">
