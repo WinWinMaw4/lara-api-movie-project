@@ -73,8 +73,7 @@
                         <ul class="list-group">
                             @foreach($credits as $credit)
                                 <a href="{{$credit['linkToPage']}}" class="text-decoration-none">
-                                    <li class="text-white-50 list-group-item border-0 bg-dark">{{$credit['release_year']}} &middot <b class="text-white">{{$credit['title']}}</b> as <i> {{$credit['character']}}</i></li>
-                                    {{$credit['media_type']}}
+                                    <li class="text-white-50 list-group-item border-0 bg-dark">{{$credit['release_year']}} &middot <b class="text-white">{{$credit['title']}}</b> as <i> {{$credit['character']}}</i>  </li>
                                 </a>
                             @endforeach
                         </ul>

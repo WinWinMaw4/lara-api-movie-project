@@ -89,7 +89,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <span class="text-primary text-uppercase my-3 h4">top rate</span>
-                <a href="{{route('movie.seeAll','top rate movies','/all/',1)}}" class="text-decoration-none">See All</a>
+                <a href="{{route('tv.seeAll','top rate show','/all/',1)}}" class="text-decoration-none">See All</a>
             </div>
             <div class="row row-cols-3 row-cols-sm-3 row-cols-md-4 row-cols-lg-4 row-cols-xl-6 gx-2 gy-4 flex-nowrap popular-overflow-overlay custom-scroll-bar" >
                 {{--                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}

@@ -25,33 +25,33 @@ body{
 }
 
 /* Chrome, Edge and Safari */
-.custom-scroll-bar::-webkit-scrollbar {
+*::-webkit-scrollbar,.custom-scroll-bar::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
-.custom-scroll-bar::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track,.custom-scroll-bar::-webkit-scrollbar-track {
     border-radius: 5px;
     background-color: rgba(184, 192, 194, 0.15);
 }
 
-.custom-scroll-bar::-webkit-scrollbar-track:hover {
+*::-webkit-scrollbar-track:hover,.custom-scroll-bar::-webkit-scrollbar-track:hover {
     background-color: rgba(184, 192, 194, 0.15);
 }
 
-.custom-scroll-bar::-webkit-scrollbar-track:active {
+*::-webkit-scrollbar-track:active ,.custom-scroll-bar::-webkit-scrollbar-track:active {
     background-color: rgba(184, 192, 194, 0.15);
 }
 
-.custom-scroll-bar::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb,.custom-scroll-bar::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: #606060;
 }
 
-.custom-scroll-bar::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover,.custom-scroll-bar::-webkit-scrollbar-thumb:hover {
     background-color: #777676;
 }
 
-.custom-scroll-bar::-webkit-scrollbar-thumb:active {
+*::-webkit-scrollbar-thumb:active,.custom-scroll-bar::-webkit-scrollbar-thumb:active {
     background-color: #777676;
 }
 

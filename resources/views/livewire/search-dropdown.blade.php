@@ -26,19 +26,37 @@
 
                 <div class="list-group" style="background-color: #313438">
                     @foreach($searchResults as $result)
-                        <a
-                            href="{{route('movie.show',$result['id'])}}"
-                            @if($loop->last) @keydown.tab = "isOpen = false" @endif
-                            class="list-group-item list-group-item-action bg-transparent text-light ps-1 d-flex align-items-start"
-                            style="background-color: #313438" aria-current="true"
-                        >
-                            @if($result['poster_path'])
-                                <img src="{{'https://image.tmdb.org/t/p/w500/'.$result['poster_path']}}" alt="poster" width="40" height="auto" style="object-fit: contain">
-                            @else
-                                <img src="https://via.placeholder.com/50x75" alt="poster" width="40" height="auto" style="object-fit: contain">
-                            @endif
-                            <span class="fs-6 ms-2">{{$result['title']}}</span>
-                        </a>
+                        @if($result['media_type'] == 'movie')
+                            <a
+                                href="{{route('movie.show',$result['id'])}}"
+                                @if($loop->last) @keydown.tab = "isOpen = false" @endif
+                                class="list-group-item list-group-item-action bg-transparent text-light ps-1 d-flex align-items-start"
+                                style="background-color: #313438" aria-current="true"
+                            >
+                                @if($result['poster_path'])
+                                    <img src="{{'https://image.tmdb.org/t/p/w500/'.$result['poster_path']}}" alt="poster" width="40" height="auto" style="object-fit: contain">
+                                @else
+                                    <img src="https://via.placeholder.com/50x75" alt="poster" width="40" height="auto" style="object-fit: contain">
+                                @endif
+                                <span class="fs-6 ms-2">{{$result['title']}}</span>
+                                <span class="text-white-50 "> - Movie</span>
+                            </a>
+                        @elseif($result['media_type'] == 'tv')
+                            <a
+                                href="{{route('tv.show',$result['id'])}}"
+                                @if($loop->last) @keydown.tab = "isOpen = false" @endif
+                                class="list-group-item list-group-item-action bg-transparent text-light ps-1 d-flex align-items-start"
+                                style="background-color: #313438" aria-current="true"
+                            >
+                                @if($result['poster_path'])
+                                    <img src="{{'https://image.tmdb.org/t/p/w500/'.$result['poster_path']}}" alt="poster" width="40" height="auto" style="object-fit: contain">
+                                @else
+                                    <img src="https://via.placeholder.com/50x75" alt="poster" width="40" height="auto" style="object-fit: contain">
+                                @endif
+                                <span class="fs-6 ms-2">{{$result['name']}}</span>
+                                <span class="text-white-50"> - TV Show</span>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             @else

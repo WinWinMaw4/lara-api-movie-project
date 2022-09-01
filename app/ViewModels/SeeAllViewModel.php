@@ -9,7 +9,7 @@ class SeeAllViewModel extends ViewModel
 {
     public $genres;
     public $section;
-    private $seeAllMovies;
+    public $seeAllMovies;
 
     public function __construct($seeAllMovies, $genres,$section)
     {
@@ -36,7 +36,9 @@ class SeeAllViewModel extends ViewModel
             })->implode(', ');
 
             return collect($movie)->merge([
-                'poster_path'=>'https://image.tmdb.org/t/p/w300/'.$movie['poster_path'],
+                'poster_path'=>$movie['poster_path']
+                    ? 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path']
+                    : 'https://via.placeholder.com/500x600',
                 'vote_average'=>$movie['vote_average'] * 10 .'%',
                 'release_date'=>Carbon::parse($movie['release_date'])->format('M d,Y'),
                 'genres'=>$genresFormatted,
@@ -47,4 +49,6 @@ class SeeAllViewModel extends ViewModel
 
         });
     }
+
+
 }

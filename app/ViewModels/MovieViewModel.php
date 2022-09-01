@@ -23,7 +23,7 @@ class MovieViewModel extends ViewModel
             'release_date'=>Carbon::parse($this->movie['release_date'])->format('M d,Y'),
             'genres'=>collect($this->movie['genres'])->pluck('name')->flatten()->implode(', '),
             'crew'=>collect($this->movie['credits']['crew'])->take(2),
-            'cast'=>collect($this->movie['credits']['cast'])->take(5),
+            'cast'=>collect($this->movie['credits']['cast']),
             'images'=>collect($this->movie['images']['backdrops'])->take(12),
         ])->only([
             'poster_path', 'id', 'original_title', 'title', 'overview', 'release_date', 'vote_average', 'vote_count', 'genres',

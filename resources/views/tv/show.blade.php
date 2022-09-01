@@ -2,6 +2,24 @@
 @section('title') movie app @endsection
 @section('content')
     <div class="tv-show container">
+        <div class="row my-3">
+            <div class="col-12">
+{{--                @php--}}
+{{--                    $previous_url = url()->previous();--}}
+{{--                    $current_url = \Illuminate\Support\Facades\Route::current()->getName();--}}
+{{--                    $previous_route = app('router')->getRoutes($previous_url)->match(app('request')->create($previous_url))->getName();--}}
+{{--                @endphp--}}
+{{--                <a href="{{route('tv.index')}}"  class="text-decoration-none text-white-50">--}}
+{{--                    <i class="bi bi-arrow-left"></i>to index--}}
+{{--                    Back {!! URL::previous() !!} <br>{!! Route::current()->getName() !!} <br>--}}
+{{--                    <br>--}}
+{{--                    previous url => {{$previous_url}}--}}
+{{--                    current url => {{$current_url}}--}}
+{{--                </a>--}}
+
+
+            </div>
+        </div>
         {{--        tv detail--}}
         <div class="row my-3 ">
             <div class="col-12 col-md-4 col-lg-4 d-flex align-items-start justify-content-center">
@@ -109,7 +127,7 @@
                                 <th scope="row">Seasons</th>
                                 <td class="w-75">
                                     @foreach($tvshow['seasons'] as $seasons)
-                                        <a href="" class="text-decoration-none" >
+                                        <a href="{{url('/tv/'.$tvshow['id'].'/season/'.$seasons['season_number'])}}" class="text-decoration-none" >
                                             {{$seasons['name']}}
                                         </a>@if(!$loop->last), @endif
                                     @endforeach
@@ -139,7 +157,39 @@
 
         </div>
         <hr class="my-1 my-md-5 text-white-50">
-        {{--        movie cast--}}
+{{--        seasons--}}
+        <div class="row my-3">
+            <div class="col-12">
+                <h3 class="my-3 text-uppercase">Current Seasons</h3>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card  bg-dark shadow">
+                    <div class="row g-0">
+                        @isset($seasons['season_number'])
+                            @if($seasons['season_number'] == $tvshow['number_of_seasons'])
+                                <div class="col-1">
+                                    <img src="{{$seasons['poster_path']}}" alt="" class="rounded-start img-fluid">
+                                </div>
+                                <div class="col-10">
+                                    <div class="card-body h-100 position-relative ">
+                                        {{--                                   <p>{{$tvshow['id']}} {{$seasons['season_number']}}</p>--}}
+                                        <h4 class="text-secondary mb-0"><a href="{{url('/tv/'.$tvshow['id'].'/season/'.$seasons['season_number'])}}" class="text-decoration-none" >{{$seasons['name']}}</a></h4>
+                                        <span class="fs-6 fw-light">{{$seasons['air_date_year']}}</span> |
+                                        <span class="fs-6 fw-light">{{$seasons['episode_count']}} Episode</span>
+                                        <div class="py-3 position-absolute bottom-0"> {{$seasons['name']}} of {{$tvshow['name']}} premiered on {{$seasons['air_date']}}</div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endisset
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <a href="{{route('season.index',$tvshow['id'])}}" class="text-white fs-5 text-decoration-none">View All Seasons</a>
+            </div>
+        </div>
+        <hr class="my-1 my-md-5 text-white-50">
+{{-- movie cast--}}
         <div class="row my-3">
             <div class="col-12">
                 <h3 class="my-3 text-uppercase">Cast</h3>
@@ -173,6 +223,7 @@
                 </div>
             </div>
         </div>
+{{--        movie images--}}
         <div class="my-1 my-md-5 text-white-50">
         {{--        images--}}
         <div class="row my-3">

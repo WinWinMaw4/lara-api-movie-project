@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
+use App\ViewModels\SeeAllViewModel;
+use App\ViewModels\TvSeeAllViewModel;
 use App\ViewModels\TvShowViewModel;
 use App\ViewModels\TvViewModel;
 use Illuminate\Http\Request;
@@ -18,7 +20,22 @@ class TvController extends Controller
      */
 
     public  function seeAll($section , $page=1){
-        return $section;
+        abort_if($page > 500,204);
+        $genres = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=81db1dc62395c3245a614c4ac5e8284e')->json()['genres'];
+
+        if($section == 'popular tv'){
+            $seeAllTv = Http::get('https://api.themoviedb.org/3/tv/popular?api_key=81db1dc62395c3245a614c4ac5e8284e&page='.$page)->json()['results'];
+        }elseif ($section == 'airing today'){
+            $seeAllTv = Http::get('https://api.themoviedb.org/3/tv/airing_today?api_key=81db1dc62395c3245a614c4ac5e8284e&page='.$page)->json()['results'];
+        }elseif($section == 'top rate show'){
+            $seeAllTv = Http::get('https://api.themoviedb.org/3/tv/top_rated?api_key=81db1dc62395c3245a614c4ac5e8284e&page='.$page)->json()['results'];
+        }else{
+            $seeAllTv = null;
+        }
+        $viewModel = new TvSeeAllViewModel(
+            $seeAllTv,$genres,$section
+        );
+        return view('tv.see-all',$viewModel);
     }
     public function index()
     {

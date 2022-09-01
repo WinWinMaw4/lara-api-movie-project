@@ -16,11 +16,13 @@
                     </span>
 
                     <span class="fs-6 text-white-50 d-block my-1">
-                        @isset($tv['genre_ids'])
-                            @foreach($tv['genre_ids'] as $genre){{$genres->get($genre)}}@if(!$loop->last),@endif @endforeach
+{{--                        @isset($tv['genre_ids'])--}}
+{{--                            @foreach($tv['genre_ids'] as $genre){{$genres->get($genre)}}@if(!$loop->last),@endif @endforeach--}}
+{{--                        @endisset--}}
+                        @isset($tv['genres'])
+                            {{$tv['genres']}}
                         @endisset
 {{--                        @foreach($tv['genre_ids'] as $genre) {{$genres->get($genre)}} @if(!$loop->last), @endif @endforeach--}}
-
 {{--                        {{$tv['genres']}}--}}
                     </span>
 

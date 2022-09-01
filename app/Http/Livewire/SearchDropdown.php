@@ -14,10 +14,9 @@ class SearchDropdown extends Component
         $searchResults = [];
 
         if(strlen($this->search) >= 1){
-            $searchResults = Http::get('https://api.themoviedb.org/3/search/movie?api_key=81db1dc62395c3245a614c4ac5e8284e&query='.$this->search)
+            $searchResults = Http::get('https://api.themoviedb.org/3/search/multi?api_key=81db1dc62395c3245a614c4ac5e8284e&query='.$this->search)
                 ->json()['results'];
         }
-
 
         return view('livewire.search-dropdown',[
             'searchResults'=>collect($searchResults)->take(7),

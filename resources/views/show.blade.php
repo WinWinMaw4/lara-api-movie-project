@@ -69,9 +69,9 @@
                 <h3 class="my-3 text-uppercase">Cast</h3>
             </div>
             <div class="col-12 col-md-12 col-lg-12">
-                <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 g-1 g-sm-2 g-lg-2 g-xl-3">
+                <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 g-1 g-sm-2 g-lg-2 g-xl-3 flex-nowrap overflow-auto">
                     @foreach($movie['cast'] as $cast)
-                        <div class="col">
+                        <div class="col mb-3">
                             <div>
                                 <a class="w-100">
 {{--                                    'https://image.tmdb.org/t/p/w300/'.$cast['profile_path']--}}

@@ -21,6 +21,17 @@ class TvShowViewModel extends ViewModel
             'vote_average'=>$this->tvshow['vote_average'] * 10 .'%',
             'first_air_date'=>Carbon::parse($this->tvshow['first_air_date'])->format('M d,Y'),
             'last_air_date'=>Carbon::parse($this->tvshow['last_air_date'])->format('M d,Y'),
+            'seasons'=>collect($this->tvshow['seasons'])->map(function ($season){
+               return collect($season)->merge([
+                   'air_date'=>Carbon::parse($season['air_date'])->format('M d,Y'),
+                   'air_date_year'=> Carbon::parse($season['air_date'])->format('Y'),
+                   'poster_path'=>$season['poster_path']
+                       ? 'https://image.tmdb.org/t/p/w185/'.$season['poster_path']
+                       : 'https://via.placeholder.com/185x230',
+//                       : 'https://ui-avatars.com/api/size=185&name='.$season['name'],
+               ]);
+            }),
+
             'genres'=>collect($this->tvshow['genres'])->pluck('name')->flatten()->implode(', '),
             'crew'=>collect($this->tvshow['credits']['crew'])->take(2),
             'cast'=>collect($this->tvshow['credits']['cast'])->take(10)->map(function ($cast){
@@ -31,10 +42,10 @@ class TvShowViewModel extends ViewModel
                 ]);
             }),
             'images'=>collect($this->tvshow['images']['backdrops'])->take(12),
-        ])->dump();
-//        ->only([
-//            'poster_path', 'id', 'original_name','name', 'overview', 'first_air_date', 'vote_average', 'vote_count', 'genres',
-//            'credits', 'videos', 'images', 'crew', 'cast','creted_by'
+        ]);
+//->only([
+//            'poster_path', 'id', 'original_name','name', 'overview', 'first_air_date', 'last_air_date', 'vote_average', 'vote_count', 'genres',
+//            'credits', 'videos', 'images', 'crew', 'cast','created_by','seasons','number_of_seasons','number_of_episodes','status','original_language'
 //        ])
     }
 }
